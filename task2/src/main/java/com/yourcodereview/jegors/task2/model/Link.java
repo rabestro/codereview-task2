@@ -8,13 +8,21 @@ import javax.persistence.Entity;
 @Entity
 public class Link extends AbstractPersistable<Long> {
     @URL
-    private String link;
+    private String original;
 
-    public String getLink() {
-        return link;
+    public Link() {
     }
 
-    public void setLink(String link) {
-        this.link = link;
+    public Link(String original) {
+        this.original = original;
     }
+
+    public String getOriginal() {
+        return original;
+    }
+
+    public void setOriginal(String link) {
+        this.original = link;
+    }
+
 }
