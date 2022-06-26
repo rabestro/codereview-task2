@@ -12,7 +12,7 @@ import java.time.Instant;
 public class History extends AbstractPersistable<Long> {
 
     @Column(nullable = false, updatable = false)
-    private Instant date = Instant.now();
+    private final Instant date = Instant.now();
 
     @ManyToOne
     @JoinColumn(name = "link_id")

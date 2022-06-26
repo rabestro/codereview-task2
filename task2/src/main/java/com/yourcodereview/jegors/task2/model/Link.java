@@ -21,8 +21,4 @@ public class Link extends AbstractPersistable<Long> {
         return original;
     }
 
-    public void setOriginal(String link) {
-        this.original = link;
-    }
-
 }

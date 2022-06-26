@@ -1,32 +1,35 @@
 package com.yourcodereview.jegors.task2.controller;
 
 import com.yourcodereview.jegors.task2.exception.UrlNotFoundException;
-import com.yourcodereview.jegors.task2.model.dto.LinkStats;
-import com.yourcodereview.jegors.task2.repository.HistoryRepository;
+import com.yourcodereview.jegors.task2.model.projection.LinkStatistics;
 import com.yourcodereview.jegors.task2.service.StatsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController()
 public class StatsController {
     @Autowired
     private StatsService statsService;
-    @Autowired
-    private HistoryRepository historyRepository;
 
     @GetMapping("stats/{shortUrl}")
-    public LinkStats stats(@PathVariable String shortUrl) {
+    public LinkStatistics stats(@PathVariable String shortUrl) {
         return statsService
                 .getStats(shortUrl)
                 .orElseThrow(UrlNotFoundException::new);
     }
 
-    @GetMapping(value = "stats", params = { "page", "size" })
-    public LinkStats allStats(@RequestParam("page") int page, @RequestParam("count") int count) {
-        return null;
+    @GetMapping(value = "stats")
+    public List<LinkStatistics> allStats(
+            @RequestParam(value = "page", defaultValue = "0", required = false) int page,
+            @RequestParam(value = "count", defaultValue = "5", required = false) int count) {
+        var paging = PageRequest.of(page, count);
+        return statsService.getAllStats();
     }
 
 }
