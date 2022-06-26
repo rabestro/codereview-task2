@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class LinkServiceImpl implements LinkService {
     @Autowired
@@ -19,6 +21,12 @@ public class LinkServiceImpl implements LinkService {
         var link = repository.findByOriginal(original)
                 .orElseGet(() -> repository.save(new Link(original)));
 
-        return conversionService.convert(link, String.class);
+        return LINK_PREFIX + conversionService.convert(link.getId(), String.class);
+    }
+
+    @Override
+    public Optional<String> getOriginalUrl(String shortUrl) {
+        var id = Long.valueOf(shortUrl, Character.MAX_RADIX);
+        return repository.findById(id).map(Link::getOriginal);
     }
 }
