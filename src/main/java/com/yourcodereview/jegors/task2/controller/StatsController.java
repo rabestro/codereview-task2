@@ -31,7 +31,7 @@ public class StatsController {
             @RequestParam(value = "page", defaultValue = "0", required = false) @Min(0) int page,
             @RequestParam(value = "count", defaultValue = "5", required = false) @Min(2) @Max(100) int count) {
         var paging = PageRequest.of(page, count);
-        return statsService.getAllStats();
+        return statsService.getAllStats(paging);
     }
 
 }

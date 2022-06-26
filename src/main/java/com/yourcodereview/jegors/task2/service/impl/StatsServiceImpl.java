@@ -5,6 +5,7 @@ import com.yourcodereview.jegors.task2.repository.HistoryRepository;
 import com.yourcodereview.jegors.task2.service.ShortUrlService;
 import com.yourcodereview.jegors.task2.service.StatsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,8 +25,8 @@ public class StatsServiceImpl implements StatsService {
     }
 
     @Override
-    public List<LinkStatistics> getAllStats() {
-        return historyRepository.findAllStats();
+    public List<LinkStatistics> getAllStats(Pageable pageable) {
+        return historyRepository.findAllStats(pageable);
     }
 
 
