@@ -1,5 +1,6 @@
 package com.yourcodereview.jegors.task2.controller;
 
+import com.yourcodereview.jegors.task2.exception.UrlNotFoundException;
 import com.yourcodereview.jegors.task2.model.dto.GenerateRequest;
 import com.yourcodereview.jegors.task2.model.dto.GenerateResponse;
 import com.yourcodereview.jegors.task2.service.LinkService;
@@ -33,7 +34,7 @@ public class LinkController {
         attributes.addAttribute("attribute", shortUrl);
         return service.getOriginalUrl(shortUrl)
                 .map(RedirectView::new)
-                .orElseThrow();
+                .orElseThrow(UrlNotFoundException::new);
 
     }
 }

@@ -1,5 +1,6 @@
 package com.yourcodereview.jegors.task2.controller;
 
+import com.yourcodereview.jegors.task2.exception.UrlNotFoundException;
 import com.yourcodereview.jegors.task2.model.dto.LinkStats;
 import com.yourcodereview.jegors.task2.repository.HistoryRepository;
 import com.yourcodereview.jegors.task2.service.StatsService;
@@ -18,7 +19,9 @@ public class StatsController {
 
     @GetMapping("stats/{shortUrl}")
     public LinkStats stats(@PathVariable String shortUrl) {
-        return statsService.getStats(shortUrl).orElseThrow();
+        return statsService
+                .getStats(shortUrl)
+                .orElseThrow(UrlNotFoundException::new);
     }
 
     @GetMapping(value = "stats", params = { "page", "size" })
