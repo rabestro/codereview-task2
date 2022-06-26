@@ -1,7 +1,7 @@
 package com.yourcodereview.jegors.task2.controller;
 
-import com.yourcodereview.jegors.task2.dto.GenerateRequest;
-import com.yourcodereview.jegors.task2.dto.GenerateResponse;
+import com.yourcodereview.jegors.task2.model.dto.GenerateRequest;
+import com.yourcodereview.jegors.task2.model.dto.GenerateResponse;
 import com.yourcodereview.jegors.task2.service.LinkService;
 import com.yourcodereview.jegors.task2.validator.ShortUrl;
 import org.springframework.beans.factory.annotation.Autowired;

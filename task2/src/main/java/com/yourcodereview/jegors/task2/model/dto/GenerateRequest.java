@@ -1,4 +1,4 @@
-package com.yourcodereview.jegors.task2.dto;
+package com.yourcodereview.jegors.task2.model.dto;
 
 import org.hibernate.validator.constraints.URL;
 
