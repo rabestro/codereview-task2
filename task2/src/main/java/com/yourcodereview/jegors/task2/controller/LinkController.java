@@ -31,7 +31,8 @@ public class LinkController {
     public RedirectView redirect(@PathVariable @ShortUrl String shortUrl, RedirectAttributes attributes) {
         attributes.addFlashAttribute("flashAttribute", shortUrl);
         attributes.addAttribute("attribute", shortUrl);
-        return service.getOriginalUrl(shortUrl).map(RedirectView::new)
+        return service.getOriginalUrl(shortUrl)
+                .map(RedirectView::new)
                 .orElseThrow();
 
     }
